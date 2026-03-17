@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { Instagram, MessageCircle, Globe } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -367,6 +368,18 @@ export default function GuiaKelly() {
           </div>
         )}
       </div>
+      {/* FOOTER */}
+      <footer style={{ maxWidth: 700, margin: "32px auto 0", padding: "16px 24px", borderTop: "1px solid #E2E6EC", display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
+        <a href="https://instagram.com/diego.fintelman" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 6, color: "#555", textDecoration: "none", fontSize: 13 }}>
+          <Instagram size={16} /> diego.fintelman
+        </a>
+        <a href="https://wa.me/5515997820279" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 6, color: "#555", textDecoration: "none", fontSize: 13 }}>
+          <MessageCircle size={16} /> WhatsApp
+        </a>
+        <a href="https://fintelmannd.com.br" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 6, color: "#555", textDecoration: "none", fontSize: 13 }}>
+          <Globe size={16} /> fintelmannd.com.br
+        </a>
+      </footer>
     </div>
   );
 }
