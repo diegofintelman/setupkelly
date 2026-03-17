@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { Instagram, MessageCircle, Globe } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { supabase } from "@/integrations/supabase/client";
 
