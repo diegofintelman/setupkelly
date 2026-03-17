@@ -414,6 +414,7 @@ const s: Record<string, React.CSSProperties> = {
     margin: "-16px auto 0",
     padding: "0 24px",
     display: "flex",
+    flexWrap: "wrap" as const,
     gap: 10,
   },
   phaseBtn: {
