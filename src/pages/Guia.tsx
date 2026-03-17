@@ -215,6 +215,11 @@ export default function GuiaKelly() {
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <img src={logo} alt="Diego Fintelman - Tráfego Pago" style={{ height: 64, width: "auto", objectFit: "contain" }} />
             <div>
+              <h1 style={s.headerTitle}>Guia de Configuração</h1>
+              <p style={s.headerSub}>Siga cada etapa com calma. Sem pressa!</p>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 6 }}>
             <div style={s.headerBadge}>
               {STEPS.filter((_, i) => isStepComplete(i)).length} de {STEPS.length} etapas
             </div>
