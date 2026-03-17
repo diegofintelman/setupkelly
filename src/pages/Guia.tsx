@@ -214,7 +214,7 @@ export default function GuiaKelly() {
       <div style={s.header}>
         <div style={s.headerInner}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <img src={logo} alt="Diego Fintelman - Tráfego Pago" style={{ height: 64, width: "auto", objectFit: "contain" }} />
+            <img src={logo} alt="Diego Fintelman - Tráfego Pago" style={{ height: 90, width: "auto", objectFit: "contain" }} />
             <div>
               <h1 style={s.headerTitle}>Guia de Configuração</h1>
               <p style={s.headerSub}>Siga cada etapa com calma. Sem pressa!</p>
