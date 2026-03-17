@@ -14,7 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      progresso: {
+        Row: {
+          active_step: number
+          checked: Json
+          id: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active_step?: number
+          checked?: Json
+          id?: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active_step?: number
+          checked?: Json
+          id?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
