@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import logo from "@/assets/logo.png";
 import { supabase } from "@/integrations/supabase/client";
 
 // =============================================
@@ -216,6 +217,7 @@ export default function GuiaKelly() {
             <p style={s.headerSub}>Siga cada etapa com calma. Sem pressa!</p>
           </div>
           <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 6 }}>
+            <img src={logo} alt="Diego Fintelman - Tráfego Pago" style={{ height: 48, width: "auto", objectFit: "contain" }} />
             <div style={s.headerBadge}>
               {STEPS.filter((_, i) => isStepComplete(i)).length} de {STEPS.length} etapas
             </div>
