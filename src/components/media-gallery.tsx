@@ -1,0 +1,4 @@
+'use client';
+import Image from 'next/image';
+import {useState} from 'react';
+export function MediaGallery({images,label}:{images:string[];label:string}){const [index,setIndex]=useState(0);return <div className="media-gallery"><div className="gallery-image"><Image src={images[index]} alt={label+' — image '+(index+1)} fill sizes="(max-width:760px) 100vw, 50vw" className="object-cover"/></div>{images.length>1&&<div className="gallery-controls"><button aria-label={'Previous image of '+label} onClick={()=>setIndex((index-1+images.length)%images.length)}>←</button><span aria-live="polite">{index+1} / {images.length}</span><button aria-label={'Next image of '+label} onClick={()=>setIndex((index+1)%images.length)}>→</button></div>}</div>}

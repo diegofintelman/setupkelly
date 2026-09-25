@@ -1,0 +1,3 @@
+import {cms} from '@/lib/cms';import {EditorialHero,ArticleCard,ContactCTA} from '@/components/editorial';import {metadataFor} from '@/lib/seo';
+export const metadata=metadataFor({title:'Insights',description:'Perspectives on buying, owning and understanding property in Florida, by Kelly Belem.'},'/blog');
+export default async function Blog(){const posts=await cms.posts();return <><EditorialHero eyebrow="The journal / Kelly Belem" title="A little more context. A clearer perspective." description="Questions worth asking. Details worth understanding. Thoughtful guides for your next real estate decision."/><section className="container pb-24"><div className="grid-cards two">{posts.map((p,i)=><ArticleCard key={p.id} post={p} index={i}/>)}</div></section><ContactCTA/></>}

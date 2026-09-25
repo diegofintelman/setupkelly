@@ -1,0 +1,3 @@
+import {EditorialHero} from '@/components/editorial';import {LeadForm} from '@/features/forms/LeadForm';import {metadataFor} from '@/lib/seo';
+export const metadata=metadataFor({title:'Connect with Kelly',description:'Connect with Kelly Belem, Miami Real Estate Advisor.'},'/cadastrosqrcode');
+export default function QR(){return <><EditorialHero eyebrow="Kelly Belem / Miami Real Estate Advisor" title="Let’s connect." description="Leave your contact details and begin a conversation with Kelly about your real estate plans." image={{src:'/media/kelly/portrait.jpg',alt:'Kelly Belem'}}><div className="mt-8"><LeadForm kind="qrcode" source="printed-qr"/></div></EditorialHero></>}

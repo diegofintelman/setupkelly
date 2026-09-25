@@ -1,0 +1,90 @@
+import type { Development, Neighborhood, Post, Resource, ContentSection } from './models';
+const section = (id: string, heading: string, paragraphs: string[], bullets?: string[]): ContentSection => ({ id, heading, paragraphs, bullets });
+const portrait = { src: '/media/kelly/portrait.jpg', alt: 'Kelly Belem, Miami Real Estate Advisor' };
+export const developments: Development[] = [{
+  id: 'coralrock', slug: 'coralrock', title: 'The Coral Rock Village', status: 'available',
+  hero: { src: '/media/coralrock/hero-facade.webp', alt: 'Historic coral stone architecture at The Coral Rock Village' },
+  location: { address: '1301 Milan Avenue', city: 'Coral Gables', region: 'Florida' },
+  commercialInformation: { price: 3200000, currency: 'USD', displayPrice: '$3,200,000' },
+  propertyDetails: [{label: 'Built', value: '1929'}, {label: 'Cottages', value: '5'}, {label: 'Lot', value: '13,140 sq.ft.'}],
+  gallery: ['cottage-1.webp','cottage-2.webp','cottage-3.webp','cottage-4.webp','cottage5-a.jpg','ruina.webp'].map((file,i) => ({src: '/media/coralrock/'+file, alt: i === 5 ? 'Coral Rock common areas' : `Coral Rock cottage ${i+1}`})),
+  video: { src: '/media/coralrock/hero.mp4', poster: '/media/coralrock/hero-facade.webp' },
+  floorPlans: [], overview: 'A 1929 historic estate. Five oolitic coral stone structures.',
+  architecture: 'Oolitic coral stone cottages, arcades and garden courtyards.',
+  amenities: ['Private porches', 'Garden courtyards', 'Rooftop terrace'], neighborhood: 'coral-gables',
+  cta: {label: 'Discuss Coral Rock', href: '/contact?interest=coralrock'},
+  seo: { title: 'The Coral Rock Village · $3,200,000', description: 'Explore the historic estate at 1301 Milan Avenue in Coral Gables. Five coral stone cottages, represented by Kelly Belem.' },
+  relatedContent: {posts: ['16-questions-before-buying-property-in-florida'], neighborhoods: ['coral-gables']}, template: 'coralrock',
+}];
+export const neighborhoods: Neighborhood[] = [
+  { id:'coral-gables', slug:'coral-gables', title:'Coral Gables', eyebrow:'Architecture & a sense of place',
+    description:'Look beyond the address. Consider the architecture, the setting and the everyday life a property makes possible.',
+    image: {src:'/media/places/coral-gables.jpg',alt:'Historic building entrance in Coral Gables, photographed by Nils Huenerfuerst'},
+    sections:[section('context','A neighborhood through your priorities',['Start with how you want to live. Bring your preferences for architecture, daily travel, outdoor space and long-term ownership into the conversation.']),section('architecture','Character deserves careful consideration',['Historic and architecturally distinctive properties deserve a closer look at condition, maintenance and any applicable restrictions. Kelly can help frame the questions and coordinate the appropriate specialists.']),section('next','Build a considered shortlist',['Use a neighborhood conversation to narrow the search before comparing individual homes.'])],
+    seo:{title:'Coral Gables Real Estate Advisory',description:'Explore Coral Gables with a focus on architecture, ownership and your priorities.'}},
+  { id:'pinecrest', slug:'pinecrest', title:'Pinecrest', eyebrow:'Space for the way you live',
+    description:'A more personal search begins with the space you need, your daily routines and your plans for the years ahead.',
+    image:{src:'/media/places/pinecrest.jpg',alt:'Tree-canopied residential street in Pinecrest, Florida, photographed by Adrian Diaz-Sieckel'},
+    sections:[section('priorities','Begin with everyday life',['Consider the relationship between indoor and outdoor space, household needs, commute patterns and upkeep. These priorities help make a shortlist more meaningful.']),section('ownership','Consider the whole ownership picture',['Look at the property condition, insurance, maintenance and any planned improvements alongside the purchase price.']),section('conversation','Make the search personal',['Discuss what matters to you before deciding which properties deserve a visit.'])],
+    seo:{title:'Pinecrest Real Estate Advisory',description:'A thoughtful approach to finding and evaluating property in Pinecrest.'}},
+];
+const post = (id: string, title: string, excerpt: string, sourceGuide: string, readingMinutes: number, body: ContentSection[]): Post => ({
+  id,slug:id,title,excerpt,body,author:{name:'Kelly Belem',url:'/about'}, featuredImage:portrait,
+  categories:['Buyer perspective'],tags:['Florida','Ownership','Buyer preparation'],
+  publishedAt:'2026-09-17',updatedAt:'2026-09-17',seo:{title,description:excerpt},
+  relatedDevelopments:['coralrock'],relatedNeighborhoods:['coral-gables','pinecrest'],
+  adsenseEligible:true,cta:{label:'Discuss your plans with Kelly',href:'/contact'},sourceGuide,readingMinutes,editorialStatus:'working-draft',
+});
+export const posts: Post[] = [
+  post('preparing-to-buy-property-in-florida','Preparing to Buy Property in Florida','Before you look for the property, organize the purchase. A practical starting point for a better-informed search.','Pre-Purchase Guide',5,[
+    section('purpose','Start with the purpose of the purchase',['A primary residence, a second home and a rental property answer different needs. Establish your priorities before choosing an area or property. Decide how you expect to use the home and what a successful purchase would look like.']),
+    section('documents','Organize documentation and ownership questions',['Prepare your identification and discuss the documentation that applies to your circumstances with the relevant professionals. International buyers should clarify their individual requirements rather than assume that every transaction follows the same checklist.','The choice between personal ownership and a company structure belongs in a conversation with qualified legal and tax professionals. Kelly can help you bring the right people into that conversation.']),
+    section('budget','Plan beyond the asking price',['A useful budget includes the purchase, closing costs and the ongoing costs of ownership. Keep room for insurance, association fees, maintenance and any furnishing or renovation plans.'],['Organize proof of available funds.','Separate acquisition costs from ongoing costs.','Identify the reserves you want to retain after closing.']),
+    section('financing','Clarify financing early',['If financing is part of the plan, speak with a lender about eligibility, documentation and the proposed structure before committing to a property. A local bank account may be useful; discuss whether it is needed in your circumstances.']),
+    section('team','Put the team in place',['Your advisor helps connect the property search to your goals. A lender, title company and qualified legal or tax professionals contribute different expertise. Knowing who is responsible for each step makes the process easier to navigate.']),
+  ]),
+  post('16-questions-before-buying-property-in-florida','16 Questions to Ask Before Buying Property in Florida','The asking price is only the beginning. Use these questions to understand the property, its obligations and its fit with your plans.','16 Questions Guide',8,[
+    section('developer','01 / Who is the developer?',['For new construction, review the developer’s completed projects, delivery history and approach to warranty support. Ask what evidence supports the promises being made.']),
+    section('area','02 / What is changing in the area?',['Explore planned infrastructure, nearby development and competing supply. Consider how those changes could affect the experience of owning and using the property.']),
+    section('rentals','03 / What rental rules apply?',['Check the permitted uses, minimum rental periods, association rules and management arrangements for this specific property.']),
+    section('costs','04 / What does ownership really cost?',['Bring association fees, assessments, taxes, insurance and maintenance into the same conversation as the purchase price.']),
+    section('loan','05 / How will the purchase be financed?',['Discuss lender requirements, including any requirements relevant to an international buyer, before relying on a financing assumption.']),
+    section('closing','06 / What are the closing costs and credits?',['Ask for a transaction-specific estimate and clarify which costs or credits have actually been agreed.']),
+    section('investment','07 / What assumptions support the investment case?',['Review projected income alongside expenses, vacancy and the intended holding period. Projections are assumptions to examine, not promised results.']),
+    section('unit','08 / Which unit or floor plan fits the goal?',['Consider light, views, floor level, layout and how the space will be used. Similar square footage can produce a very different experience.']),
+    section('association','09 / What is the association’s financial position?',['Review the available association information, reserves, maintenance obligations and possible assessments with the appropriate professionals.']),
+    section('resale','10 / How might a future resale work?',['Consider the potential buyer audience, competing inventory and characteristics that may affect marketability.']),
+    section('assignment','11 / Can a pre-construction contract be assigned?',['Have the contract reviewed for assignment restrictions, conditions and costs rather than assuming an exit option exists.']),
+    section('international','12 / What applies to an international buyer?',['Clarify ownership, documentation and transaction questions with qualified professionals familiar with your circumstances.']),
+    section('renovation','13 / What would renovation involve?',['For an existing property, examine the scope, approvals, budget and timing of proposed work. Roofs, HVAC, windows and water damage deserve particular attention.']),
+    section('maintenance','14 / What ongoing maintenance should be expected?',['Look beyond visible finishes to the age and condition of major systems, appliances and other components.']),
+    section('insurance','15 / What insurance is available for this property?',['Discuss the building, roof, protective features and association coverage with an insurance professional. Obtain property-specific guidance.']),
+    section('short-term','16 / For an Orlando short-term rental, what is the furnishing plan?',['The guide’s final question is specific to Orlando and short-term rental use. Consider furnishing, guest experience, setup time and operating costs. Do not assume that Orlando rental conditions apply to Miami or another location.']),
+  ]),
+  post('florida-property-buying-process','The Florida Property Buying Process','From the first decision to the keys in your hand: understand the sequence, the people involved and the questions to ask.','Buying Process Guide',6,[
+    section('objectives','01 / Define your objectives',['Clarify intended use, preferred location, budget and timing. These decisions give the search a useful frame.']),
+    section('planning','02 / Prepare the financial plan',['Consider available funds, financing, closing costs and reserves. Involve the relevant professionals early.']),
+    section('selection','03 / Select and compare properties',['Evaluate the neighborhood, layout, association rules and ownership obligations together. The right shortlist is tied to your priorities.']),
+    section('offer','04 / Prepare an offer',['Discuss price, terms, contingencies and the proposed timetable. An offer is a set of conditions, not just a number.']),
+    section('contract','05 / Move into contract',['Once an agreement is reached, follow the contract’s requirements for deposits and deadlines. The title company and other professionals have defined roles in the transaction.']),
+    section('diligence','06 / Complete due diligence',['Use the contractual review and inspection periods to examine the property and documents. The applicable deadlines come from the agreement.']),
+    section('approval','07 / Complete financing, if applicable',['A financed purchase includes the lender’s review and approval process. Keep documentation organized and coordinate outstanding requirements. An all-cash purchase follows a different path.']),
+    section('closing','08 / Prepare for closing',['Coordinate the final documents, funds and outstanding conditions with the closing team. Timing depends on the transaction; a sample timeline should never replace contractual deadlines.']),
+    section('keys','09 / Receive the property and plan the handover',['Coordinate access and the practical steps that come with ownership. The next chapter includes utilities, insurance, association requirements and upkeep.']),
+  ]),
+  post('after-buying-property-in-florida','What Happens After Buying Property in Florida','The purchase is complete. Now turn your attention to access, utilities, maintenance and the practical details of ownership.','Post-Purchase Guide',5,[
+    section('access','Secure access to the property',['Arrange keys, locks, access codes and any shared-entry credentials. Confirm who should retain access after the handover.']),
+    section('insurance','Confirm the insurance arrangements',['Coordinate coverage and effective dates with your insurance professional and lender, where applicable. Do not leave these arrangements until after closing if they are required earlier.']),
+    section('utilities','Set up utilities and services',['Find out which services are included through the association and which require individual accounts. Coordinate activation dates.']),
+    section('association','Complete association registration',['Confirm the owner registration process, contact details, rules and any access or administrative requirements.']),
+    section('furnishing','Plan furnishing and setup',['Align furnishing and any improvements with the way you intend to use the property. Confirm building procedures before arranging deliveries or work.']),
+    section('management','Decide how the property will be cared for',['If you will be away or intend to rent where permitted, discuss local management and maintenance arrangements. Kelly can help connect you with appropriate providers.']),
+    section('records','Keep records and coordinate professional support',['Organize transaction documents and ongoing expenses. Discuss your reporting obligations with a qualified tax professional.']),
+    section('ownership','Make room to enjoy ownership',['A thoughtful handover helps you move from completing a transaction to making the property part of your life. Keep your advisor informed as your needs evolve.']),
+  ]),
+];
+export const resources: Resource[] = posts.map((p,i) => ({
+  id: `guide-${i+1}`,slug: p.sourceGuide.toLowerCase().replaceAll(' ','-'),title:p.sourceGuide,
+  description:p.excerpt,cover:{src:`/media/guides/guide-${i+1}.webp`,alt:`Cover of Kelly Belem’s ${p.sourceGuide}`},
+  access:'open',articleSlug:p.slug,seo:{title:p.sourceGuide,description:p.excerpt},
+}));

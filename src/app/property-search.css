@@ -1,0 +1,18 @@
+.search-bar.search-entry{grid-template-columns:minmax(0,1fr) auto}
+.idx-intro{padding-bottom:0}
+.idx-intro .intro{max-width:690px}
+.idx-actions{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-top:28px}
+.idx-actions .button{margin-top:0}
+.idx-actions nav{display:flex;gap:24px;flex-wrap:wrap}
+.idx-wrapper{max-width:1280px;margin:0 auto;padding:clamp(2rem,5vw,5rem) clamp(1rem,4vw,4rem)}
+.idx-frame{display:block;width:100%;height:900px;min-height:900px;border:0;background:var(--paper)}
+.idx-attribution{margin-top:28px;padding-top:24px;border-top:1px solid var(--line);font-size:15px;line-height:1.6;color:var(--ink)}
+.idx-attribution p{max-width:850px}
+.idx-wrapper>.preview-note{margin-top:28px;font-size:12px}
+@media(max-width:1100px) and (min-width:821px){.desktop-nav{gap:16px}.header-inner{gap:16px}}
+@media(max-width:768px){
+  .idx-frame{height:100dvh;min-height:100dvh}
+  body:has(.idx-page) .site-header{position:relative}
+  .idx-intro h1{font-size:clamp(2.25rem,10vw,3.5rem)}
+}
+@media(max-width:600px){.search-bar.search-entry{grid-template-columns:1fr}}

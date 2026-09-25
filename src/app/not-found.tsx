@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <section className="container empty-state"><p className="eyebrow">404 · A different direction</p><h1>This page isn’t here.</h1><p>Let’s help you find what you were looking for.</p><Link className="button" href="/">Return home ↗</Link></section>}
