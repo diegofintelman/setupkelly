@@ -2,7 +2,7 @@
 export const reservedSlugs = new Set([
   'about','buy','sell','invest','neighborhoods','properties','property-search','search','blog','resources','contact',
   'privacy-policy','terms','disclaimer','cadastrosqrcode','api','_next','media','fonts',
-  'robots.txt','sitemap.xml','favicon.ico','icon.svg','wp-admin','wp-json',
+  'robots.txt','sitemap.xml','favicon.ico','icon.svg','icon.png','wp-admin','wp-json',
 ]);
 export function isDevelopmentSlug(slug: string): boolean {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) && !reservedSlugs.has(slug.toLowerCase());

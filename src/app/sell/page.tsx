@@ -1,3 +1,20 @@
 import {ServicePage} from '@/components/service-page';import {metadataFor} from '@/lib/seo';
-export const metadata=metadataFor({title:'Sell',description:'Thoughtful property positioning and personal seller guidance with Kelly Belem.'},'/sell');
-export default function Sell(){return <ServicePage slug="sell" label="Sell" title="Present the property. Understand the opportunity." description="Every property has a story. A considered approach connects its qualities with the buyers who will appreciate them." image="/media/kelly/architecture.jpg" topics={['Property positioning','Presentation & preparation','Market context','Buyer conversations','Offer evaluation & coordination']} sections={[{id:'context',heading:'Start with the whole picture.',paragraphs:['Your timing, the property’s characteristics and the surrounding market help shape the approach. The first step is a conversation about what you want the sale to accomplish.']},{id:'presentation',heading:'Present with intention.',paragraphs:['Thoughtful photography, clear information and a coherent property story help buyers understand what makes a home distinctive. Preparation should serve that story.']},{id:'offers',heading:'Evaluate more than the number.',paragraphs:['An offer includes timing, conditions and practical considerations. Kelly helps you compare those details and coordinate the next steps with the transaction team.']}]}/>}
+export const metadata=metadataFor({title:'Sell Your Home in Miami',description:'Data-driven pricing, honest assessment and a strategy built for your property. Sell your Miami home with Kelly Belem, Keller Williams Agent of the Year.'},'/sell');
+export default function Sell(){return <ServicePage slug="sell" label="Sell"
+ title="An honest price. A clear strategy. A strong sale."
+ description="Kelly takes a data-driven approach, analyzing what the market is saying: comparable sales, competing listings, pricing trends and buyer activity. You get an honest, objective assessment and a strategy built for your property and your goals."
+ image="/media/kelly/architecture.jpg"
+ primary={{label:'What Is My Home Worth?',href:'/contact?interest=valuation'}} secondary={{label:'Talk to Kelly',href:'/contact?interest=sell'}}
+ guide={{eyebrow:'Free guide · A Fresh Perspective on Selling',title:'Every property deserves more than a listing.',text:'Seven principles Kelly uses to evaluate every property before it goes to market: presentation, marketing, the ideal buyer, preparation, feedback, strategy and pricing.',cover:{src:'/media/guides/guide-5.webp',alt:'Cover of Kelly Belem’s A Fresh Perspective on Selling'},cta:'I want the selling guide',href:'/contact?interest=guide-selling-guide'}}
+ pointsTitle="How Kelly sells."
+ numbered
+ points={[
+  {title:'Read the market.',text:'Comparable sales, competing listings, pricing trends and buyer activity. The price starts with data, not with hope.'},
+  {title:'An honest assessment.',text:'You get an objective view of your property: what buyers will value, what may hold it back and what is worth preparing.'},
+  {title:'Present with intention.',text:'Professional photography, video, clear information and a story that shows what makes the property distinctive.'},
+  {title:'Reach the right buyers.',text:'The Keller Williams network, the MLS, targeted digital campaigns and Kelly’s own relationships with buyers in the U.S. and abroad.'},
+  {title:'Evaluate every offer.',text:'Price, terms, timing and conditions, compared side by side. Kelly negotiates and coordinates through closing.'},
+ ]}
+ topics={['Single-family homes & estates','Historic & architecturally distinctive properties','Waterfront homes','Condominiums','Listings that need a fresh strategy']}
+ review={1}
+ next={{title:'Find out what your property is worth today.',text:'A confidential, no-obligation conversation and a market analysis built for your property.',cta:'Request a Market Analysis',href:'/contact?interest=valuation'}}/>}

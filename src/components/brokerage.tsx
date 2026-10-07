@@ -1,10 +1,18 @@
 import Image from 'next/image';
+import {brokerage} from '@/lib/site';
 
-/** Official brokerage artwork supplied for this local review. */
+/** Official brokerage artwork. Shown with the same visual weight as Kelly's logo. */
+export function BrokerageLogo({className=''}:{className?:string}){
+  return <span className={'brokerage-logo '+className}>
+    <Image className="brokerage-logo-dark" src="/media/brand/kw-capital.png" alt="Keller Williams Capital Realty" width={1072} height={335} sizes="170px"/>
+    <Image className="brokerage-logo-light" src="/media/brand/kw-capital-ivory.png" alt="" aria-hidden width={1072} height={335} sizes="170px"/>
+  </span>;
+}
+
 export function BrokerageIdentification({compact=false}:{compact?:boolean}){
   return <div className={'brokerage-identification '+(compact?'compact':'')}>
-    <Image src="/media/brand/kw-capital.png" alt="Keller Williams Realty Capital" width={268} height={84} sizes={compact?'180px':'268px'} />
-    <span className="brokerage-caption">Kelly Belem · Miami Real Estate Advisor</span>
+    <BrokerageLogo/>
+    {!compact&&<span className="brokerage-caption">{brokerage.name} · {brokerage.address}, {brokerage.city}</span>}
   </div>;
 }
 

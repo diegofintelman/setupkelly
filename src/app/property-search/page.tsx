@@ -13,12 +13,12 @@ export default function PropertySearchPage() {
   return <div className="idx-page">
     <div className="container"><Breadcrumbs items={[{label: 'Property Search', href: '/property-search'}]} /></div>
     <header className="container editorial-hero idx-intro">
-      <p className="eyebrow">South Florida / Find your next chapter</p>
-      <h1>South Florida Property Search</h1>
-      <p className="intro">Explore homes, condos and investment properties in the South Florida MLS. Use the search below to explore locations and refine your preferences.</p>
+      <p className="eyebrow">Search Properties</p>
+      <h1>Every listing in South Florida.</h1>
+      <p className="intro">Browse live MLS listings across South Florida. When something catches your eye, Kelly can tell you what the photos don’t.</p>
       <div className="idx-actions">
         <Link href="/contact" className="button">Talk with Kelly <span aria-hidden="true">↗</span></Link>
-        <nav aria-label="Explore neighborhoods"><Link href="/neighborhoods/coral-gables" className="text-link">Coral Gables</Link><Link href="/neighborhoods/pinecrest" className="text-link">Pinecrest</Link></nav>
+        <Link href="/neighborhoods" className="text-link">Explore the neighborhoods</Link>
       </div>
     </header>
     <section className="idx-wrapper" aria-label="MLS property search tool">

@@ -9,14 +9,14 @@ export type Development = {
   propertyDetails: { label: string; value: string }[];
   gallery: Media[]; video?: { src: string; poster: string };
   floorPlans: { title: string; file: string; image?: Media }[];
-  overview: string; architecture: string; amenities: string[];
+  overview: string; summary?: string; architecture: string; amenities: string[];
   developer?: { name: string; description?: string };
   neighborhood: string; cta: CTA; seo: SEO;
   relatedContent: { posts: string[]; neighborhoods: string[] };
   template: 'coralrock' | 'editorial';
 };
 export type Neighborhood = {
-  id: string; slug: string; title: string; eyebrow: string; description: string;
+  id: string; slug: string; title: string; eyebrow: string; description: string; card?: string;
   image?: Media; sections: ContentSection[]; seo: SEO;
 };
 export type Post = {
@@ -29,6 +29,6 @@ export type Post = {
 };
 export type Resource = {
   id: string; slug: string; title: string; description: string; cover: Media;
-  access: 'open' | 'gated' | 'hybrid'; articleSlug: string;
+  access: 'open' | 'gated' | 'hybrid'; articleSlug?: string; audience: 'buyers' | 'sellers';
   download?: string; seo: SEO;
 };
