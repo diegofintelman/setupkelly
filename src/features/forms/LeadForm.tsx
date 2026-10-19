@@ -1,13 +1,14 @@
 'use client';
 import {useId,useRef,useState} from 'react';
+import {useRouter} from 'next/navigation';
 import type {FormEvent} from 'react';
 import type {LeadInput,LeadResult} from '@/lib/forms/contracts';
 import {analytics} from '@/lib/analytics';
 import {contact} from '@/lib/site';
 export const interestOptions=[['buy','Buying'],['sell','Selling'],['valuation','A home valuation'],['invest','Investing'],['developer-review','A developer review'],['guide','A guide (PDF)'],['coralrock','The Coral Rock Village'],['other','Something else']] as const;
 export function normalizeInterest(value?:string){if(!value)return '';if(value.startsWith('guide-'))return 'guide';if(value.startsWith('neighborhood-'))return 'buy';return interestOptions.some(([v])=>v===value)?value:''}
-export function LeadForm({kind='contact',source='contact',compact=false,defaultInterest='',title}:{kind?:LeadInput['kind'];source?:string;compact?:boolean;defaultInterest?:string;title?:string}){
- const id=useId(),started=useRef(false),requestId=useRef('');
+export function LeadForm({kind='contact',source='contact',compact=false,defaultInterest='',title,guides=[]}:{kind?:LeadInput['kind'];source?:string;compact?:boolean;defaultInterest?:string;title?:string;guides?:{slug:string;title:string}[]}){
+ const id=useId(),started=useRef(false),requestId=useRef(''),router=useRouter();
  const [status,setStatus]=useState<'idle'|'sending'|'success'|'error'>('idle'),[message,setMessage]=useState('');
  async function submit(e:FormEvent<HTMLFormElement>){
   e.preventDefault();if(status==='sending')return;
@@ -18,8 +19,10 @@ export function LeadForm({kind='contact',source='contact',compact=false,defaultI
   try{
    const response=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)});
    const result=await response.json() as LeadResult & {error?:string};
-   if(!response.ok||!result.ok||result.mode!=='mock')throw new Error(result.error||'Unable to complete the preview. Please try again.');
-   setStatus('success');setMessage(kind==='newsletter'?'Signup preview complete. You have not been subscribed.':'Thank you. Kelly will be in touch shortly. (Preview: nothing was sent or saved.)');
+   if(!response.ok||!result.ok)throw new Error(result.error||'We could not send your message. Please try again.');
+   const preview=result.mode==='mock';
+   if(kind==='guide'){setStatus('success');setMessage('Thank you. Opening your guides…');analytics.track('download_resource',{cta_location:source,page_type:kind});router.push('/download?guide='+input.interest?.replace(/^guide-/,''));return}
+   setStatus('success');setMessage(kind==='newsletter'?(preview?'Signup preview complete. You have not been subscribed.':'Thank you. You are on the list for Kelly’s Market Notes.'):'Thank you. Kelly will be in touch shortly.'+(preview?' (Preview: nothing was sent or saved.)':''));
    analytics.track(kind==='newsletter'?'newsletter_signup':'submit_lead',{cta_location:source,page_type:kind});
    form.reset();requestId.current='';started.current=false;
   }catch(error){setStatus('error');setMessage(error instanceof Error?error.message:'Please try again.')}
@@ -27,7 +30,7 @@ export function LeadForm({kind='contact',source='contact',compact=false,defaultI
  const field=(name:string,label:string,type='text',required=false)=><label className="field" key={name} htmlFor={id+name}><span>{label}{required?' *':''}</span><input id={id+name} name={name} type={type} required={required} maxLength={250} autoComplete={name==='phone'?'tel':name==='address'?'street-address':name}/></label>;
  return <form className={'lead-form '+(compact?'compact':'')} onSubmit={submit} onFocus={()=>{if(!started.current){analytics.track('start_form',{cta_location:source,page_type:kind});started.current=true;}}}>
  {title&&<h2 className="lead-form-title">{title}</h2>}
- <p className="preview-note">Design preview · Use sample details. Nothing is sent or saved.</p>
+ {kind==='guide'&&<label className="field" htmlFor={id+'interest'}><span>Guide *</span><select id={id+'interest'} name="interest" required defaultValue={defaultInterest&&guides.some(g=>'guide-'+g.slug===defaultInterest)?defaultInterest:''}><option value="" disabled>Select a guide</option>{guides.map(g=><option key={g.slug} value={'guide-'+g.slug}>{g.title}</option>)}</select></label>}
  {kind!=='newsletter'&&field('name','Full name','text',true)}{field('email','Email','email',true)}
  {kind!=='newsletter'&&field('phone','Phone (with country code)','tel',true)}{kind==='qrcode'&&field('address','Address')}
  {kind==='contact'&&<><label className="field" htmlFor={id+'interest'}><span>I’m interested in</span><select id={id+'interest'} name="interest" defaultValue={normalizeInterest(defaultInterest)}><option value="">Select an option</option>{interestOptions.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
@@ -35,7 +38,7 @@ export function LeadForm({kind='contact',source='contact',compact=false,defaultI
  <label className="field" htmlFor={id+'message'}><span>What are you considering?</span><textarea id={id+'message'} name="message" rows={4} maxLength={2000}/></label></>}
  <div className="honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
  {kind==='newsletter'&&<label className="check-label"><input type="checkbox" name="consent" required/><span>I would like to receive Kelly’s Market Notes by email.</span></label>}
- <button className="button" disabled={status==='sending'} type="submit">{status==='sending'?'Checking…':kind==='newsletter'?'Subscribe':kind==='qrcode'?'Connect with Kelly':'Send to Kelly'} <span aria-hidden>↗</span></button>
+ <button className="button" disabled={status==='sending'} type="submit">{status==='sending'?'Sending…':kind==='newsletter'?'Subscribe':kind==='qrcode'?'Connect with Kelly':kind==='guide'?'Get the guide':'Send to Kelly'} <span aria-hidden>↗</span></button>
  {kind!=='newsletter'&&<p className="form-consent">By submitting, you agree to be contacted by Kelly Belem by phone, text and email about real estate services. Reply STOP to opt out at any time. Message and data rates may apply. Your information stays with Kelly. It is never shared or sold.</p>}
  <p className="form-status" role={status==='error'?'alert':'status'} aria-live="polite">{message}</p>
  {kind==='qrcode'&&status==='success'&&<WhatsAppLink source="qrcode"/>}</form>;

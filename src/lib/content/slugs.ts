@@ -1,7 +1,7 @@
 // Root pages always win. The CMS adapter must apply this same policy on publication.
 export const reservedSlugs = new Set([
   'about','buy','sell','invest','neighborhoods','properties','property-search','search','blog','resources','contact',
-  'privacy-policy','terms','disclaimer','cadastrosqrcode','api','_next','media','fonts',
+  'privacy-policy','terms','disclaimer','cadastrosqrcode','developments','newsletter','download','guides','api','_next','media','fonts',
   'robots.txt','sitemap.xml','favicon.ico','icon.svg','icon.png','wp-admin','wp-json',
 ]);
 export function isDevelopmentSlug(slug: string): boolean {

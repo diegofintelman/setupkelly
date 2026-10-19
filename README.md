@@ -7,17 +7,18 @@ This repository contains the current Next.js institutional site, including Coral
 ## Scope of this review
 
 - All pages send `noindex, nofollow, noarchive`; robots.txt disallows crawling.
-- Contact, newsletter and QR forms are simulations. No submissions are persisted or sent to Kelly.
+- Contact, newsletter and QR forms post to `/api/leads`. With `LEADS_ENDPOINT_URL` and `LEADS_ENDPOINT_TOKEN` set, the server sends each lead to Kelly's Google Sheet through the Apps Script in `integrations/google-apps-script/` (contact requests are also emailed to Kelly). Without them the forms stay a mock and nothing is saved.
+- Guide PDFs live in `private/guides/` (not `public/`). A guide request on `/resources` sets an HttpOnly cookie and opens the hidden `/download` page (unlinked, noindex, out of the sitemap, disallowed in robots.txt); `/download/file/[file]` serves a PDF only with that cookie.
 - The Matrix MLS iframe is live, external and operated by Matrix. Its own forms follow Matrix's rules.
-- CMS, analytics, newsletter delivery and CRM integrations are not enabled.
+- CMS, analytics, newsletter email delivery and CRM integrations are not enabled. Newsletter signups are only collected in the sheet.
 - Legal pages are drafts for review. This is not the production kellybelem.com website.
 
 ## Development and Vercel
 
 Use Node 24 and pnpm 10.32.1. Run `pnpm install --frozen-lockfile`, `pnpm test`, `pnpm build`; `pnpm dev` starts local development.
 
-The existing Vercel project is `setupkelly`, linked to this repository's `main` branch. Root Directory must be empty (repository root). `vercel.json` sets Next.js, the install/build commands and `.next` output, overriding the old Vite preset. No new secrets or services are required. Enable Vercel's system environment variables.
+The existing Vercel project is `setupkelly`, linked to this repository's `main` branch. Root Directory must be empty (repository root). `vercel.json` sets Next.js, the install/build commands and `.next` output, overriding the old Vite preset. Enable Vercel's system environment variables. The only secrets are `LEADS_ENDPOINT_URL` and `LEADS_ENDPOINT_TOKEN` (see `.env.example`).
 
-`SITE_URL` optionally overrides the metadata origin. Without it, local development uses localhost, Vercel preview builds use `VERCEL_URL`, and the production alias of this review project uses https://setupkelly.vercel.app. All environments remain noindex and mock-only. Form requests accept only the configured origin, exact review aliases and exact Vercel deployment/branch domains; cross-origin requests are rejected.
+`SITE_URL` optionally overrides the metadata origin. Without it, local development uses localhost, Vercel preview builds use `VERCEL_URL`, and the production alias of this review project uses https://setupkelly.vercel.app. All environments remain noindex. Form requests accept only the configured origin, exact review aliases and exact Vercel deployment/branch domains; cross-origin requests are rejected.
 
 The Mac ZIP package and original local project are maintained separately; they are not deployment inputs.

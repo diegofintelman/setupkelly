@@ -1,5 +1,6 @@
 import {validateLead} from '@/lib/forms/contracts';
-import {mockLeadProvider} from '@/lib/forms/mock-provider';
+import {leadProviderFromEnv} from '@/lib/forms/apps-script-provider';
+import {guideCookieHeader} from '@/lib/guides';
 import {isAllowedPreviewOrigin} from '@/lib/preview-origin';
 export async function POST(request:Request){
  const url=new URL(request.url);
@@ -16,5 +17,14 @@ export async function POST(request:Request){
  let input:unknown;try{input=JSON.parse(text)}catch{return Response.json({error:'Invalid request.'},{status:400})}
  const parsed=validateLead(input);
  if(!parsed.value)return Response.json({error:parsed.error},{status:400});
- return Response.json(await mockLeadProvider.submit(parsed.value),{headers:{'Cache-Control':'no-store'}});
+ // Path of the page that sent the form, so the sheet shows which page or landing page converted.
+ let page='';try{const referer=request.headers.get('referer');if(referer){const u=new URL(referer);if(u.origin===authority.origin)page=u.pathname.slice(0,200)}}catch{}
+ try{
+  const result=await leadProviderFromEnv().submit(parsed.value,{page});
+  const headers=new Headers({'Cache-Control':'no-store'});
+  // A confirmed guide request unlocks the hidden /download page and its PDFs.
+  if(parsed.value.kind==='guide')headers.append('Set-Cookie',guideCookieHeader(authority.protocol==='https:'));
+  return Response.json(result,{headers});
+ }
+ catch(error){console.error('lead submission failed:',error instanceof Error?error.message:error);return Response.json({error:'We could not send your message right now. Please call or email Kelly directly.'},{status:502,headers:{'Cache-Control':'no-store'}})}
 }

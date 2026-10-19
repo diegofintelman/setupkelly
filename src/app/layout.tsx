@@ -5,13 +5,15 @@ import './phase3b.css';
 import './motion.css';
 import './property-search.css';
 import './refresh.css';
+import './structure.css';
 import {SiteHeader} from '@/components/site-header';
 import {SiteFooter} from '@/components/site-footer';
 import {PageEvent} from '@/components/page-event';
 import {ScrollMotion} from '@/components/scroll-motion';
+import {WelcomePrompt} from '@/components/welcome-prompt';
 import {siteUrl} from '@/lib/seo';
 const serif=localFont({src:'../fonts/playfair-latin.woff2',variable:'--font-editorial',display:'swap',weight:'400 900'});
 const sans=localFont({src:'../fonts/inter-latin.woff2',variable:'--font-body',display:'swap',weight:'100 900'});
 export const metadata:Metadata={metadataBase:new URL(siteUrl),title:{default:'Kelly Belem | Miami Real Estate Advisor',template:'%s | Kelly Belem'},description:'Buying, selling and investing in Miami real estate with precision and discretion.',robots:{index:false,follow:false}};
 export const viewport:Viewport={width:'device-width',initialScale:1,themeColor:'#F5EFE6'};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" className={serif.variable+' '+sans.variable}><body><a href="#main" className="skip-link">Skip to content</a><SiteHeader/><main id="main">{children}</main><SiteFooter/><PageEvent/><ScrollMotion/></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" className={serif.variable+' '+sans.variable}><body><a href="#main" className="skip-link">Skip to content</a><SiteHeader/><main id="main">{children}</main><SiteFooter/><PageEvent/><ScrollMotion/><WelcomePrompt/></body></html>}

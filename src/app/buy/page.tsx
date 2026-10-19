@@ -6,7 +6,7 @@ export default function Buy(){return <ServicePage slug="buy" label="Buy"
  image="/media/kelly/entrance.jpg"
  primary={{label:'Start Your Search',href:'/property-search'}} secondary={{label:'Talk to Kelly',href:'/contact?interest=buy'}}
  note="I will search for your home until I find it."
- guide={{eyebrow:'Free guide',title:'16 questions to ask before buying property in Florida.',text:'Developer track record, association finances, rental rules, insurance, resale. The questions most buyers only think of after signing.',cover:{src:'/media/guides/guide-2.webp',alt:'Cover of Kelly Belem’s 16 Questions Guide'},cta:'I want the guide',href:'/contact?interest=guide-16-questions-guide'}}
+ guide={{eyebrow:'Free guide',title:'16 questions to ask before buying property in Florida.',text:'Developer track record, association finances, rental rules, insurance, resale. The questions most buyers only think of after signing.',cover:{src:'/media/guides/guide-2.webp',alt:'Cover of Kelly Belem’s 16 Questions Guide'},cta:'I want the guide',href:'/resources?guide=16-questions-guide#request'}}
  pointsTitle="What Kelly handles for you."
  points={[
   {title:'A search built on your priorities.',text:'Before visiting a single property, Kelly learns how you live, what you need and what you will not compromise on.'},

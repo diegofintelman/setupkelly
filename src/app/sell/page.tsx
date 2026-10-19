@@ -5,7 +5,7 @@ export default function Sell(){return <ServicePage slug="sell" label="Sell"
  description="Kelly takes a data-driven approach, analyzing what the market is saying: comparable sales, competing listings, pricing trends and buyer activity. You get an honest, objective assessment and a strategy built for your property and your goals."
  image="/media/kelly/architecture.jpg"
  primary={{label:'What Is My Home Worth?',href:'/contact?interest=valuation'}} secondary={{label:'Talk to Kelly',href:'/contact?interest=sell'}}
- guide={{eyebrow:'Free guide · A Fresh Perspective on Selling',title:'Every property deserves more than a listing.',text:'Seven principles Kelly uses to evaluate every property before it goes to market: presentation, marketing, the ideal buyer, preparation, feedback, strategy and pricing.',cover:{src:'/media/guides/guide-5.webp',alt:'Cover of Kelly Belem’s A Fresh Perspective on Selling'},cta:'I want the selling guide',href:'/contact?interest=guide-selling-guide'}}
+ guide={{eyebrow:'Free guide · A Fresh Perspective on Selling',title:'Every property deserves more than a listing.',text:'Seven principles Kelly uses to evaluate every property before it goes to market: presentation, marketing, the ideal buyer, preparation, feedback, strategy and pricing.',cover:{src:'/media/guides/guide-5.webp',alt:'Cover of Kelly Belem’s A Fresh Perspective on Selling'},cta:'I want the selling guide',href:'/resources?guide=selling-guide#request'}}
  pointsTitle="How Kelly sells."
  numbered
  points={[

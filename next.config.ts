@@ -2,6 +2,8 @@ import type { NextConfig } from 'next';
 const config: NextConfig = {
   poweredByHeader: false,
   outputFileTracingRoot: process.cwd(),
+  // Gated guide PDFs are read from disk by /download/file/[file]; keep them in the server bundle.
+  outputFileTracingIncludes: { '/download/file/[file]': ['./private/guides/**'] },
   images: { formats: ['image/avif', 'image/webp'] },
   async headers() {
     return [{ source: '/:path*', headers: [

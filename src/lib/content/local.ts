@@ -134,9 +134,9 @@ export const resources: Resource[] = [
   ...posts.map((p,i): Resource => ({
     id: `guide-${i+1}`,slug: p.sourceGuide.toLowerCase().replaceAll(' ','-'),title:p.sourceGuide,
     description:p.excerpt,cover:{src:`/media/guides/guide-${i+1}.webp`,alt:`Cover of Kelly Belem’s ${p.sourceGuide}`},
-    access:'gated',articleSlug:p.slug,audience:'buyers',download:`/media/guides/pdf/${guidePdfs[i]}`,seo:{title:p.sourceGuide,description:p.excerpt},
+    access:'gated',articleSlug:p.slug,audience:'buyers',download:`/download/file/${guidePdfs[i].replace('.pdf','')}`,seo:{title:p.sourceGuide,description:p.excerpt},
   })),
   {id:'guide-5',slug:'selling-guide',title:'A Fresh Perspective on Selling',description:'Seven principles for presenting, marketing and pricing a property for the right buyer.',
     cover:{src:'/media/guides/guide-5.webp',alt:'Cover of Kelly Belem’s A Fresh Perspective on Selling'},access:'gated',audience:'sellers',
-    download:'/media/guides/pdf/fresh-perspective-on-selling.pdf',seo:{title:'A Fresh Perspective on Selling',description:'Seven principles for presenting, marketing and pricing a property for the right buyer.'}},
+    download:'/download/file/fresh-perspective-on-selling',seo:{title:'A Fresh Perspective on Selling',description:'Seven principles for presenting, marketing and pricing a property for the right buyer.'}},
 ];
