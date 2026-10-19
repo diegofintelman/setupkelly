@@ -81,7 +81,14 @@ const post = (id: string, title: string, excerpt: string, sourceGuide: string, r
   relatedDevelopments:['coralrock'],relatedNeighborhoods:[],
   adsenseEligible:true,cta:{label:'Discuss your plans with Kelly',href:'/contact'},sourceGuide,readingMinutes,editorialStatus:'working-draft',
 });
-export const posts: Post[] = [
+// Featured photos per article (Unsplash/Pexels, see SITE INSTITUCIONAL-BLOG-LPs/bairros/CREDITOS.md, and Kelly's own aerials).
+const postImages: Record<string, {src: string; alt: string}> = {
+  'preparing-to-buy-property-in-florida': {src: '/media/places/brickell.jpg', alt: 'Brickell skyline over Biscayne Bay at dusk'},
+  '16-questions-before-buying-property-in-florida': {src: '/media/places/coral-gables.jpg', alt: 'Aerial view of the Biltmore and the tree canopy of Coral Gables'},
+  'florida-property-buying-process': {src: '/media/places/miami-beach.jpg', alt: 'Aerial view of Miami Beach and the Atlantic coastline'},
+  'after-buying-property-in-florida': {src: '/media/aerial/tile-roofs.jpg', alt: 'Aerial view of tile-roof homes among mature trees in Miami'},
+};
+const posts0: Post[] = [
   post('preparing-to-buy-property-in-florida','Preparing to Buy Property in Florida','Before you look for the property, organize the purchase. A practical starting point for a better-informed search.','Pre-Purchase Guide',5,[
     section('purpose','Start with the purpose of the purchase',['A primary residence, a second home and a rental property answer different needs. Establish your priorities before choosing an area or property. Decide how you expect to use the home and what a successful purchase would look like.']),
     section('documents','Organize documentation and ownership questions',['Prepare your identification and discuss the documentation that applies to your circumstances with the relevant professionals. International buyers should clarify their individual requirements rather than assume that every transaction follows the same checklist.','The choice between personal ownership and a company structure belongs in a conversation with qualified legal and tax professionals. Kelly can help you bring the right people into that conversation.']),
@@ -129,6 +136,7 @@ export const posts: Post[] = [
     section('ownership','Make room to enjoy ownership',['A thoughtful handover helps you move from completing a transaction to making the property part of your life. Keep your advisor informed as your needs evolve.']),
   ]),
 ];
+export const posts: Post[] = posts0.map(p => postImages[p.slug] ? {...p, featuredImage: postImages[p.slug]} : p);
 const guidePdfs = ['pre-purchase-guide.pdf','16-questions-guide.pdf','buying-process-guide.pdf','post-purchase-guide.pdf'];
 export const resources: Resource[] = [
   ...posts.map((p,i): Resource => ({
